@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homaira Yousufi - Personal Webpage</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <h1 id="main-title">Homaira Yousufi</h1>
+    </header>
+
+    <main>
+        <!-- Bio Section -->
+        <section>
+            <p>Hello! I’m Homaira, a Computer Science student passionate about technology, design, and creativity. I enjoy learning new coding skills and applying them to real-world projects.</p>
+            <figure>
+                <img src="myphoto.jpg" alt="Homaira Yousufi" class="profile-img">
+                <figcaption>That's me enjoying a sunny day in Almaty!</figcaption>
+            </figure>
+        </section>
+
+        <!-- Books List -->
+        <section>
+            <h2>Books I Love</h2>
+            <ul>
+                <li>The Alchemist</li>
+                <li>Atomic Habits</li>
+                <li>Clean Code</li>
+            </ul>
+        </section>
+
+        <!-- Goals / Interests -->
+        <section>
+            <h2>My Goals</h2>
+            <ol>
+                <li>Become a skilled web developer</li>
+                <li>Contribute to open-source projects</li>
+                <li>Travel to 10 new countries</li>
+            </ol>
+        </section>
+
+        <!-- Fun Fact -->
+        <div class="fun-fact">
+            <h2>Fun Fact About Me</h2>
+            <p>I can speak four languages: English, Russian, Kazakh, and Persian!</p>
+        </div>
+
+        <!-- Favorite Website -->
+        <section>
+            <p>Check out my favorite resource: 
+                <a href="https://www.freecodecamp.org" target="_blank">FreeCodeCamp</a>
+            </p>
+        </section>
+
+        <!-- Table -->
+        <section>
+            <h2>My Weekly Schedule</h2>
+            <table>
+                <tr>
+                    <th>Day</th>
+                    <th>Activity</th>
+                </tr>
+                <tr>
+                    <td>Monday</td>
+                    <td>University Classes</td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td>Study & Projects</td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td>Gym & Reading</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Form -->
+        <section>
+            <h2>Contact Me</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Homaira Yousufi</p>
+    </footer>
+
+</body>
+</html>
+/* Variables */
+:root {
+    --main-color: #4a90e2;
+    --bg-color: #f5f7fa;
+    --font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #f5f7fa, #dce3f0);
+    color: #333;
+}
+
+header {
+    background-color: var(--main-color);
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+h1, h2 {
+    margin: 0.5em 0;
+}
+
+.profile-img {
+    width: 200px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+section {
+    margin: 20px;
+}
+
+.fun-fact {
+    background-color: #fff3cd;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+a {
+    color: var(--main-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ff6600;
+    text-decoration: underline;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 10px auto;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+form {
+    display: block;
+    max-width: 400px;
+    margin: auto;
+}
+
+input, textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: var(--main-color);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover, button:focus {
+    background-color: #ff6600;
+}
+
+footer {
+    background-color: var(--main-color);
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .profile-img {
+        width: 100%;
+        max-width: 300px;
+    }
+}
