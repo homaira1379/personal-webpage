@@ -1,0 +1,217 @@
+# 📦 Project: Freelance Invoice & Client Management App
+
+This canvas includes **all files** you need. Create the folder structure exactly as shown and copy each code block into its corresponding file.
+
+```
+freelance-invoice-app/
+├── index.html
+├── clients.html
+├── invoices.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── main.js
+│   ├── clients.js
+│   ├── invoices.js
+│   ├── data.js
+│   └── utils.js
+└── data/
+    └── quotes.json
+```
+
+---
+
+## index.html (Dashboard)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Freelance Dashboard | Invoice App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Freelance Invoice App</h1>
+    <nav>
+      <ul class="nav">
+        <li><a href="./index.html" class="active">Dashboard</a></li>
+        <li><a href="./clients.html">Clients</a></li>
+        <li><a href="./invoices.html">Invoices</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="cards-grid" id="stats">
+      <article class="card">
+        <h3>Total Clients</h3>
+        <p class="big" id="statTotalClients">0</p>
+      </article>
+      <article class="card">
+        <h3>Total Invoices</h3>
+        <p class="big" id="statTotalInvoices">0</p>
+      </article>
+      <article class="card">
+        <h3>Total Amount</h3>
+        <p class="big" id="statTotalAmount">$0.00</p>
+      </article>
+      <article class="card">
+        <h3>Paid / Unpaid</h3>
+        <p class="big" id="statPaidUnpaid">0 / 0</p>
+      </article>
+    </section>
+
+    <section class="quote" id="quoteCard">
+      <h2>Motivational Quote</h2>
+      <blockquote>
+        <p id="quoteText">Loading quote…</p>
+        <footer>— <span id="quoteAuthor">…</span></footer>
+      </blockquote>
+    </section>
+  </main>
+
+  <footer class="site-footer">&copy; <span id="year"></span> Freelance Invoice App</footer>
+
+  <script type="module">
+    import { loadClients, loadInvoices } from './js/data.js';
+    import { formatCurrency } from './js/utils.js';
+
+    const yearEl = document.getElementById('year');
+    yearEl.textContent = new Date().getFullYear();
+
+    function renderStats() {
+      const clients = loadClients();
+      const invoices = loadInvoices();
+
+      const totalClients = clients.length;
+      const totalInvoices = invoices.length;
+      const totals = invoices.reduce((acc, inv) => acc + Number(inv.amount || 0), 0);
+      const paidCount = invoices.filter(i => i.paid === true).length;
+      const unpaidCount = totalInvoices - paidCount;
+
+      document.getElementById('statTotalClients').textContent = totalClients;
+      document.getElementById('statTotalInvoices').textContent = totalInvoices;
+      document.getElementById('statTotalAmount').textContent = formatCurrency(totals);
+      document.getElementById('statPaidUnpaid').textContent = `${paidCount} / ${unpaidCount}`;
+    }
+
+    async function loadQuote() {
+      const textEl = document.getElementById('quoteText');
+      const authorEl = document.getElementById('quoteAuthor');
+      try {
+        const res = await fetch('./data/quotes.json');
+        const quotes = await res.json();
+        if (!Array.isArray(quotes) || quotes.length === 0) throw new Error('No quotes');
+        const random = quotes[Math.floor(Math.random() * quotes.length)];
+        textEl.textContent = random.text ?? 'Keep going. Keep growing.';
+        authorEl.textContent = random.author?.trim() || 'Unknown';
+      } catch (err) {
+        textEl.textContent = 'Stay focused and keep shipping.';
+        authorEl.textContent = 'Unknown';
+        console.error(err);
+      }
+    }
+
+    renderStats();
+    loadQuote();
+  </script>
+</body>
+</html>
+```
+
+---
+
+## clients.html (Add/View/Edit/Delete Clients)
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clients | Freelance Invoice App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Clients</h1>
+    <nav>
+      <ul class="nav">
+        <li><a href="./index.html">Dashboard</a></li>
+        <li><a href="./clients.html" class="active">Clients</a></li>
+        <li><a href="./invoices.html">Invoices</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Add / Edit Client</h2>
+      <form id="clientForm" class="form-grid" autocomplete="off">
+        <input type="hidden" id="clientId" />
+        <label>
+          Name*
+          <input type="text" id="clientName" required />
+        </label>
+        <label>
+          Email*
+          <input type="email" id="clientEmail" required />
+        </label>
+        <label>
+          Company
+          <input type="text" id="clientCompany" />
+        </label>
+        <label class="full">
+          Notes
+          <textarea id="clientNotes" rows="3"></textarea>
+        </label>
+        <div class="actions">
+          <button type="submit" class="btn primary" id="saveClientBtn">Save Client</button>
+          <button type="button" class="btn" id="resetClientBtn">Reset</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>All Clients</h2>
+      <div class="table-wrap">
+        <table class="table" id="clientsTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Company</th>
+              <th>Notes</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">&copy; <span id="year"></span> Freelance Invoice App</footer>
+
+  <script type="module" src="./js/clients.js"></script>
+</body>
+</html>
+```
+
+---
+
+## invoices.html (Create/View Invoices)
+
+```html
+<!DOCTYPE html>
+<html lang="en
+```
