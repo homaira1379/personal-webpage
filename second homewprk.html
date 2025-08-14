@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starlight Cinema</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Starlight Cinema</h1>
+        <nav>
+            <ul>
+                <li><a href="#now-showing">Now Showing</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Welcome to Starlight Cinema</h2>
+        <p>Your ultimate movie experience</p>
+        <a href="#now-showing" class="btn">See Showtimes</a>
+    </section>
+
+    <section id="now-showing">
+        <h2>Now Showing</h2>
+        <div class="movie-cards">
+            <article class="movie-card">
+                <img src="poster1.jpg" alt="Movie 1 Poster">
+                <h3>Movie Title 1</h3>
+                <p>Action-packed adventure that keeps you on the edge of your seat.</p>
+                <a href="#" class="btn">Book Tickets</a>
+            </article>
+            <article class="movie-card">
+                <img src="poster2.jpg" alt="Movie 2 Poster">
+                <h3>Movie Title 2</h3>
+                <p>Heartwarming drama that will touch your soul.</p>
+                <a href="#" class="btn">Book Tickets</a>
+            </article>
+            <article class="movie-card">
+                <img src="poster3.jpg" alt="Movie 3 Poster">
+                <h3>Movie Title 3</h3>
+                <p>Laugh-out-loud comedy for the whole family.</p>
+                <a href="#" class="btn">Book Tickets</a>
+            </article>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Located in the heart of the city, Starlight Cinema offers the latest blockbusters in luxurious comfort.</p>
+    </section>
+
+    <footer id="contact">
+        <p>&copy; Starlight Cinema 2025 | Contact: info@starlightcinema.com</p>
+    </footer>
+</body>
+</html>
+:root {
+    --bg-color: #111;
+    --accent-color: #e50914;
+    --text-color: #fff;
+    --font-main: 'Montserrat', sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #000;
+    position: sticky;
+    top: 0;
+}
+
+header h1 {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin-left: 1rem;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--accent-color);
+}
+
+.hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: url('hero-banner.jpg') center/cover no-repeat;
+}
+
+.hero h2 {
+    font-size: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    margin-top: 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #b00710;
+}
+
+.movie-cards {
+    display: flex;
+    gap: 1rem;
+    padding: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.movie-card {
+    background-color: #222;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    padding: 1rem;
+    max-width: 300px;
+    text-align: center;
+}
+
+.movie-card img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #000;
+    margin-top: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+    }
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+    .movie-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+}
